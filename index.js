@@ -13,7 +13,7 @@ module.exports = class BetterConnections extends Plugin {
       ...await getModule([ 'modal', 'inner' ]),
       ...await getModule([ 'connection', 'integration' ])
     };
-    this.injectSettings();
+    //this.injectSettings();
     this.manager = new ConnectionManager();
     this.manager.start();
   }
@@ -43,7 +43,7 @@ module.exports = class BetterConnections extends Plugin {
   }
 
   pluginWillUnload () {
-    uninject('better-connections-settings');
+    //uninject('better-connections-settings');
     this.manager.stop();
   }
 };

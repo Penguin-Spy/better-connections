@@ -5,14 +5,14 @@ module.exports = (manager) => {
       color: '#FF66AA',
       _bc: true,
       icon: {
-        color: `${manager.baseUrl}/osu.svg`,
-        white: `${manager.baseUrl}/osu-white.svg`
+        darkSVG: `${manager.baseUrl}/osu.svg`,
+        lightSVG: `${manager.baseUrl}/osu.svg`
       },
       enabled: true,
       fetchAccount: async (id) => {
         let accounts = [];
         try {
-          accounts = await manager.cachedGet(`${manager.baseUrl}/api/connections/${id || manager.getCurrentUser().id}`);
+          accounts = await manager.cachedGet(`${manager.baseUrl}/api/connections/${id}`);
         } catch (e) {
         // Let it fail silently
         }
@@ -22,8 +22,8 @@ module.exports = (manager) => {
         const username = account.id;
         return `https://osu.ppy.sh/users/${encodeURIComponent(username)}`;
       },
-      onDisconnect: async (account) => {
-        window.open(`${manager.baseUrl}/api/link/delete?type=${account.type}`);
+      onDisconnect: async () => {
+        window.open(`${manager.baseUrl}/api/link/delete?type=osu`);
       },
       onConnect: async () => {
         window.open(`${manager.baseUrl}/api/link/osu`);
